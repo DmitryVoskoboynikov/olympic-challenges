@@ -1,8 +1,5 @@
 <?php
 
-require_once("autoloader.php");
-
-
 $input = array(2, 3, 3, 3, 2);
 $res = array();
 
@@ -11,7 +8,7 @@ foreach ($input as $value)
     $res[$value] = $res[$value] + 1;
 }
 
-print_r($res);
+//print_r($res);
 
 // all numbers is different, then size of $res == 5
 if (sizeof($res) == 5)
