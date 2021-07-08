@@ -3,7 +3,7 @@
 require_once("autoloader.php");
 
 
-$input = array(1, 1, 1, 1, 1);
+$input = array(2, 2, 3, 3, 3);
 $res = array();
 
 foreach ($input as $value)
@@ -27,7 +27,6 @@ if (sizeof($res) == 4)
     return;
 }
 
-
 if (sizeof($res) == 3)
 {
     foreach ($res as $key => $value)
@@ -42,7 +41,6 @@ if (sizeof($res) == 3)
     return;
 }
 
-/**
 if (sizeof($res) == 2)
 {
     foreach ($res as $key => $value)
@@ -53,9 +51,9 @@ if (sizeof($res) == 2)
         }
     }
 
-    echo ""
+    echo "full house";
+    return;
 }
-*/
 
 if (sizeof($res) == 1)
 {
