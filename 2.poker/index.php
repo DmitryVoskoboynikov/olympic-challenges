@@ -3,7 +3,7 @@
 require_once("autoloader.php");
 
 
-$input = array(2, 2, 3, 3, 3);
+$input = array(2, 3, 3, 3, 2);
 $res = array();
 
 foreach ($input as $value)
