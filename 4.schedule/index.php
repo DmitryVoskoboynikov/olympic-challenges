@@ -12,11 +12,13 @@ function createChain(&$chains, $event, $events)
     $s = $event[0]; //время начала события
     $t = $event[1]; //время окончания события
 
+    $i = 0;
     foreach ($events as $event_from_events)
     {
+        $i= $i + 1;
         if ($t <= $event_from_events[0])
         {
-            $chains[] = $event_from_events;
+            $chains[$i] = $event_from_events;
             createChain($chains, $event_from_events, $events);
             break;
         }
