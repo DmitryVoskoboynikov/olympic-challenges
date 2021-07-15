@@ -8,7 +8,7 @@ function cmp($a, $b)
     return ($a[0] < $b[0]) ? -1 : 1;
 }
 
-function createChain(&$chains, $event, $events)
+function createChain(&$chains, $event, $events, $n)
 {
     $s = $event[0]; //время начала события
     $t = $event[1]; //время окончания события
@@ -16,7 +16,7 @@ function createChain(&$chains, $event, $events)
     $i = 0;
     $events_tmp = array();
 
-    for ($i = 1; $i <= 5; $i++)
+    for ($i = 1; $i <= $n; $i++)
     {
         if ($t <= $events[$i][0])
         {
@@ -30,7 +30,7 @@ function createChain(&$chains, $event, $events)
         $firstKey = array_key_first($events_tmp);
         $chains[$firstKey] = $events_tmp[$firstKey];
 
-        createChain($chains, $events_tmp[$firstKey], $events);
+        createChain($chains, $events_tmp[$firstKey], $events, $n);
     }
 }
 
@@ -49,7 +49,21 @@ $chains = array();
 for ($i = 1; $i <= $n; $i++) {
     $chains[$i][$i] = $events[$i];
 
-    createChain($chains[$i], $events[$i], $events);
+    createChain($chains[$i], $events[$i], $events, $n);
 }
 
 print_r($chains);
+
+$maxSize = 0;
+$k = 1;
+foreach ($chains as $i => $chain)
+{
+    $size = sizeof($chain);
+
+    if ($size > $maxSize) {
+        $maxSize = $size;
+        $k = $i;
+    }
+}
+
+echo implode(" ", (array_keys($chains[$k])));
