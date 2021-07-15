@@ -6,6 +6,13 @@ function addEvent($chain, $schedule)
     $t = $chain
 }
 */
+function cmp($a, $b)
+{
+    if ($a[0] == $b[0]) {
+        return 0;
+    }
+    return ($a[0] < $b[0]) ? -1 : 1;
+}
 
 function createChain(&$chains, $event, $events)
 {
@@ -13,23 +20,30 @@ function createChain(&$chains, $event, $events)
     $t = $event[1]; //время окончания события
 
     $i = 0;
-    foreach ($events as $event_from_events)
+    $events_tmp = array();
+
+    for ($i = 1; $i <= 5; $i++)
     {
-        $i= $i + 1;
-        if ($t <= $event_from_events[0])
+        if ($t <= $events[$i][0])
         {
-            $chains[$i] = $event_from_events;
-            createChain($chains, $event_from_events, $events);
-            break;
+            $events_tmp[$i] = $events[$i];
         }
     }
 
+    if (!empty($events_tmp)) {
+        uasort($events_tmp, "cmp");
+
+        $firstKey = array_key_first($events_tmp);
+        $chains[] = $events_tmp[$firstKey];
+
+        createChain($chains, $events_tmp[$firstKey], $events);
+    }
 }
 
 $n = 5;
 
 $events = array(
-   1 => array(2, 6),
+   1 => array(6, 7),
    2 => array(1, 3),
    3 => array(1, 4),
    4 => array(4, 5),
