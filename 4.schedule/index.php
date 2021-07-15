@@ -1,11 +1,5 @@
 <?php
-//staff
-/**
-function addEvent($chain, $schedule)
-{
-    $t = $chain
-}
-*/
+
 function cmp($a, $b)
 {
     if ($a[0] == $b[0]) {
@@ -43,7 +37,7 @@ function createChain(&$chains, $event, $events)
 $n = 5;
 
 $events = array(
-   1 => array(2, 6),
+   1 => array(6, 7),
    2 => array(1, 3),
    3 => array(1, 4),
    4 => array(4, 5),
