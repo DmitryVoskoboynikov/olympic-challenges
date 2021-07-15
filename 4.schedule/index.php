@@ -34,7 +34,7 @@ function createChain(&$chains, $event, $events)
         uasort($events_tmp, "cmp");
 
         $firstKey = array_key_first($events_tmp);
-        $chains[] = $events_tmp[$firstKey];
+        $chains[$firstKey] = $events_tmp[$firstKey];
 
         createChain($chains, $events_tmp[$firstKey], $events);
     }
@@ -43,7 +43,7 @@ function createChain(&$chains, $event, $events)
 $n = 5;
 
 $events = array(
-   1 => array(6, 7),
+   1 => array(2, 6),
    2 => array(1, 3),
    3 => array(1, 4),
    4 => array(4, 5),
