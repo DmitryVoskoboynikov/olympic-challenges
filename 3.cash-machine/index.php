@@ -12,9 +12,9 @@ foreach ($nominals as $banknote)
     if ($a > 0)
     {
         $output[] = strval($a) . "x" . strval($banknote) . " ";
-
-        $s = $s - ($banknote * $a);
     }
+
+    $s = $s - ($banknote * $a);
 
     if ($s == 0)
     {
