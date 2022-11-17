@@ -8,8 +8,6 @@ function floors($k, $m, $floors = array())
     while (($n * $k + 1) <= $m) {
         $floors[] = $n * $k + 1;
         $n++;
-
-        if (($n * $k + 1) > $m) break;
     }
 
     return $floors;
