@@ -1,27 +1,24 @@
 <?php
 
-$taxis = array(1, 10, 19);
-//print_r($taxis);
+$taxis = array(100, 100, 1);
 
-$min = 0;
-$max = 0;
-$mid = 0;
+//Теперь вычесляем среднее значение и проверяем можно ли к нему привести все числа
+$avg = array_sum($taxis) / 3;
+//echo $avg.PHP_EOL;
 
-sort($taxis);
-//print_r($taxis);
-$min = $taxis[0];
-$max = $taxis[count($taxis) - 1];
-$mid = $taxis[1];
+//Затем от каждого такси идем к средне арифметическому и вычисляем сколько шагов надо что бы дойти, складываем
+//их, затем идем к средне арифметическому и вычисляем сколько шагов надо что бы вернуться складываем их и
+//если эти два числа равны то задачи имеет решение и выводим одно из этих чисел
+$forward = 0;
+$back = 0;
 
-//echo $min.PHP_EOL;
-//echo $mid.PHP_EOL;
-//echo $max.PHP_EOL;
+foreach ($taxis as $taxi) {
+    if ($taxi < $avg) $forward += $avg - $taxi;
+    if ($taxi > $avg) $back += $taxi - $avg;
+}
 
-//Вычисляем на сколько max больше mid
-$diff = $max - $mid;
-
-if (($min + $diff == $mid) && ($mid == $max - $diff)) {
-    echo $diff.PHP_EOL;
+if ($forward == $back) {
+    echo $forward.PHP_EOL;
 } else {
     echo 'IMPOSSIBLE'.PHP_EOL;
 }
