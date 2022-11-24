@@ -55,7 +55,7 @@ function sum($prices, $n, $level = 1, $mix, $sum, $output, &$out) {
         //foreach ($out as $o) {
         //    if ($sum > $o) {
         //        $sum -= $prices[$i];
-        //        continue;
+        //        continue 2;
         //    }
         //}
         //if (in_array($sum, $out)) {
@@ -66,11 +66,11 @@ function sum($prices, $n, $level = 1, $mix, $sum, $output, &$out) {
         $output[$level] = $i;
 
         if ($level == $n) {
-            if (all_el_in_arr_are_diff($output)) {
+            //if (all_el_in_arr_are_diff($output)) {
                 $out[implode(" ", $output)] = $sum;
                 //echo implode(",", $output)." ";
                 //echo $sum.PHP_EOL;
-            }
+            //}
         } else {
             sum($mix[$level+1], $n, $level + 1, $mix, $sum, $output, $out);
         }
@@ -80,17 +80,41 @@ function sum($prices, $n, $level = 1, $mix, $sum, $output, &$out) {
 }
 
 $out = array();
-sum($mix[1], $n, 1, $mix, 0, [], $out);
+//sum($mix[1], $n, 1, $mix, 0, [], $out);
 
 //print_r($out);
 
-asort($out);
+//asort($out);
 //print_r($out);
 
-$sum = $out[array_key_first($out)];
+//$sum = $out[array_key_first($out)];
 //echo array_key_first($out);
 
-foreach ($out as $k => $s) {
-    if ($s == $sum)
-        echo $k.':'.$s.PHP_EOL;
+//foreach ($out as $k => $s) {
+//    if ($s == $sum && $k == '2 7 4 10 6 8 5 9 1 3')
+//        echo $k.':'.$s.PHP_EOL;
+//}
+
+
+//Пробуем способом дойти до суммы с использование объекта Step.
+class Step {
+    public $i;
+    public $amount;
+    public $parent;
+
+    public function __construct($i, $amount, $parent = null)
+    {
+        $this->i = $i;
+        $this->amount = $amount;
+        $this->parent = $parent;
+    }
 }
+
+function path($mix, $output, $out){
+    foreach ($mix as $k => $value) {
+        $step = new Step($k, $value);
+
+    }
+}
+
+path($mix[1], array(), array());
