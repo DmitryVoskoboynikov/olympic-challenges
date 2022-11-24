@@ -10,7 +10,7 @@ $n = 7;
 $distances = array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7);
 
 // Цена за один киллометр для каждого такси 1, 2, 3 и.т.д
-$prices = array('1' => 8, '2' => 5,  '3' => 6, '4' => 4, '5' => 8, '6' => 3, '7' => 7);
+$prices = array('1' => 8, '2' => 5, '3' => 6, '4' => 4, '5' => 8, '6' => 3, '7' => 7);
 
 // Для начала попробуем перебрать все варианты и вывести самый дешевый
 function prices($distances, $prices, $output = []) {
@@ -47,6 +47,10 @@ function sum($prices, $n, $level = 1, $mix, $sum, $output, &$out) {
         $sum += $prices[$i];
 
         $output[$level] = $i;
+
+        //if ($level - 1 >= 1 && $i == $output[$level - 1]) {
+        //    continue;
+        //}
 
         if ($level == $n) {
             if (all_el_in_arr_are_diff($output)) {
