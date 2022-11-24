@@ -108,13 +108,38 @@ class Step {
         $this->amount = $amount;
         $this->parent = $parent;
     }
-}
 
-function path($mix, $output, $out){
-    foreach ($mix as $k => $value) {
-        $step = new Step($k, $value);
+    function calculate()
+    {
 
+    }
+
+    public function step($step, $array, $mix, $z, $n)
+    {
+        if ($z == $n) {
+            foreach ($mix as $k => $v) {
+                $step = new Step($k, $v, $step);
+                //print_r($step->amount);
+                //$step->calculate();
+            }
+        } else {
+            foreach ($array as $k => $v) {
+                $step = new Step($k, $v, $step);
+
+                $step->step($step, $mix[$z + 1], $mix,$z + 1, $n);
+            }
+        }
     }
 }
 
-path($mix[1], array(), array());
+
+//print_r($mix);
+$z = 1;
+
+for ($i = 1; $i <= $n; $i++){
+    $step = new Step($i, $mix['1'][$i]);
+    print_r($step);
+    die();
+
+    $step->step($step, $mix['2'],$mix, $z + 1, $n);
+}
