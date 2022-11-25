@@ -4,15 +4,18 @@
 
 
 // Количество сотрудников
-$n = 10;
+//$n = 10;
+$n = 6;
 
 // Расстояние до дома для каждого сотрудника
-$distances = array('1' => 1, '2' => 2, '3' => 2, '4' => 1, '5' => 2, '6' => 1,
-    '7' => 1, '8' => 1, '9' => 1, '10' => 2);
+//$distances = array('1' => 1, '2' => 2, '3' => 2, '4' => 1, '5' => 2, '6' => 1,
+//    '7' => 1, '8' => 1, '9' => 1, '10' => 2);
+$distances = array('1' => 999, '2' => 1000, '3' => 999, '4' => 999, '5' => 999, '6' => 999);
 
 // Цена за один киллометр для каждого такси 1, 2, 3 и.т.д
-$prices = array('1' => 2, '2' => 2, '3' => 1, '4' => 1, '5' => 2, '6' => 1,
-    '7' => 1, '8' => 2, '9' => 1, '10' => 2);
+//$prices = array('1' => 2, '2' => 2, '3' => 1, '4' => 1, '5' => 2, '6' => 1,
+//    '7' => 1, '8' => 2, '9' => 1, '10' => 2);
+$prices = array('1' => 10000, '2' => 10000, '3' => 10000, '4' => 9999, '5' => 10000, '6' => 10000);
 
 // Для начала попробуем перебрать все варианты и вывести самый дешевый
 function prices($distances, $prices, $output = []) {
@@ -29,12 +32,28 @@ $mix = prices($distances, $prices);
 //print_r($mix);
 //echo PHP_EOL;
 
+// Решение из ответов
 arsort($distances);
-print_r($distances);
+echo 'Дистанции в порядки убывания'.PHP_EOL;
+print_r($distances); // 30 20 10
 
 asort($prices);
-print_r($prices);
+echo 'Цены в порядке возростания'.PHP_EOL;
+print_r($prices); // 20 30 50
 
+foreach ($distances as $n => $distance) {
+    $key = array_key_first($prices);
+    unset($prices[$key]);
+    //array_shift($prices);
+    $output[] = $key;
+}
+
+$reversed = array_reverse($output);
+foreach ($reversed as $k => $v) {
+    echo $v. ' ';
+}
+
+// Конец решения из ответов
 /**
 function sum($mix, &$output) {
 
