@@ -27,9 +27,65 @@ function prices($distances, $prices, $output = []) {
 
 $mix = prices($distances, $prices);
 //print_r($mix);
-//die();
 //echo PHP_EOL;
 
+arsort($distances);
+print_r($distances);
+
+asort($prices);
+print_r($prices);
+
+/**
+function sum($mix, &$output) {
+
+    foreach ($mix as $m => $values) {
+
+        foreach ($values as $k => $sum) {
+            if ($m == 1) {
+                $output[$k] = $sum;
+            } else {
+                foreach ($output as $key => $summa) {
+                    $keys = explode(" ", $key);
+                    if (!in_array($k, $keys)) {
+                        $output[$key . ' ' . $k] = $summa + $sum;
+                    }
+                }
+
+            }
+
+        }
+
+        // Unset here
+        foreach ($output as $key => $val)
+        {
+            $keys = explode(" ", $key);
+            if (sizeof($keys) < $m) {
+                unset($output[$key]);
+            }
+        }
+
+    }
+
+}
+
+$output = [];
+$out = [];
+sum($mix, $output);
+
+print_r($output);
+
+asort($output);
+
+$sum = $output[array_key_first($output)];
+//echo array_key_first($out);
+
+foreach ($output as $k => $s) {
+    if ($s == $sum)
+        echo $k.':'.$s.PHP_EOL;
+}
+**/
+
+/**
 function all_el_in_arr_are_diff($array) {
     $in = array();
 
@@ -80,66 +136,18 @@ function sum($prices, $n, $level = 1, $mix, $sum, $output, &$out) {
 }
 
 $out = array();
-//sum($mix[1], $n, 1, $mix, 0, [], $out);
+sum($mix[1], $n, 1, $mix, 0, [], $out);
 
 //print_r($out);
 
-//asort($out);
+asort($out);
 //print_r($out);
 
-//$sum = $out[array_key_first($out)];
+$sum = $out[array_key_first($out)];
 //echo array_key_first($out);
 
-//foreach ($out as $k => $s) {
-//    if ($s == $sum && $k == '2 7 4 10 6 8 5 9 1 3')
-//        echo $k.':'.$s.PHP_EOL;
-//}
-
-
-//Пробуем способом дойти до суммы с использование объекта Step.
-class Step {
-    public $i;
-    public $amount;
-    public $parent;
-
-    public function __construct($i, $amount, $parent = null)
-    {
-        $this->i = $i;
-        $this->amount = $amount;
-        $this->parent = $parent;
-    }
-
-    function calculate()
-    {
-
-    }
-
-    public function step($step, $array, $mix, $z, $n)
-    {
-        if ($z == $n) {
-            foreach ($mix as $k => $v) {
-                $step = new Step($k, $v, $step);
-                //print_r($step->amount);
-                //$step->calculate();
-            }
-        } else {
-            foreach ($array as $k => $v) {
-                $step = new Step($k, $v, $step);
-
-                $step->step($step, $mix[$z + 1], $mix,$z + 1, $n);
-            }
-        }
-    }
+foreach ($out as $k => $s) {
+    if ($s == $sum && $k == '2 7 4 10 6 8 5 9 1 3')
+        echo $k.':'.$s.PHP_EOL;
 }
-
-
-//print_r($mix);
-$z = 1;
-
-for ($i = 1; $i <= $n; $i++){
-    $step = new Step($i, $mix['1'][$i]);
-    print_r($step);
-    die();
-
-    $step->step($step, $mix['2'],$mix, $z + 1, $n);
-}
+ */
